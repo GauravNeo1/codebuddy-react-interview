@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import "../styles/MovieTheaterSeatsBooking.css";
-import TicketQuantitySelector from "../components/MovieTheaterBooking/TicketQuantitySelector";
-import SeatsPositions from "../components/MovieTheaterBooking/SeatsPositions";
-import SeatSelectionSummary from "../components/MovieTheaterBooking/SeatSelectionSummary";
+import TicketQuantitySelector from "../components/MovieTheaterSeatsBooking/TicketQuantitySelector";
+import SeatsPositions from "../components/MovieTheaterSeatsBooking/SeatsPositions";
+import SeatSelectionSummary from "../components/MovieTheaterSeatsBooking/SeatSelectionSummary";
 import SuccessSubmitDialog from "../dialog/SuccessSubmitDialog";
 import { updateReservedStatus } from "../utils/utils";
 import { GET_SEATS, SUBMIT } from "../constants/constants";
@@ -24,6 +24,7 @@ const MovieTheaterSeatsBooking = () => {
       setSeatsData(data);
     } catch (error) {
       console.error("Error fetching seats:", error);
+      handleOpenDialog("apiFailed");
     }
   };
 
@@ -48,7 +49,6 @@ const MovieTheaterSeatsBooking = () => {
     } else {
       if (selectedSeats?.length >= 5) {
         handleOpenDialog("invalidNumsOfSeats");
-        return;
       } else {
         setSelectedSeats((prevSeats) => [...prevSeats, { rowId, seatId }]);
       }
@@ -56,7 +56,7 @@ const MovieTheaterSeatsBooking = () => {
   };
 
   const handleBookingSubmit = async () => {
-    const seatIds = selectedSeats?.map((item) => item.seatId);
+    const seatIds = selectedSeats?.map((item) => item?.seatId);
     try {
       let response = await fetch(`${SUBMIT}`, {
         method: "POST",
@@ -75,6 +75,7 @@ const MovieTheaterSeatsBooking = () => {
       }
     } catch (error) {
       console.error("Error submitting booking:", error);
+      handleOpenDialog("apiFailed");
     }
   };
 
@@ -83,22 +84,6 @@ const MovieTheaterSeatsBooking = () => {
     setTotalCost(sum);
     sum !== 0 ? setIncludedBaseTicketCost(sum + 20) : setIncludedBaseTicketCost(0);
   }, [selectedSeats]);
-
-  // const handleRowCountChange = (numRows) => {
-  //   if (numRows >= 3 && numRows <= 10) {
-  //     setSelectedSeats([]);
-  //     setRowCount(numRows);
-  //   } else {
-  //     if (numRows < 3) {
-  //       setSelectedSeats([]);
-  //       setRowCount(3);
-  //     } else if (numRows > 10) {
-  //       setSelectedSeats([]);
-  //       setRowCount(10);
-  //     }
-  //     handleOpenDialog("invalidNumsRow");
-  //   }
-  // };
 
   const handleRowCountChange = (numRows) => {
     let newRowCount = numRows;
@@ -119,7 +104,7 @@ const MovieTheaterSeatsBooking = () => {
 
   return (
     <>
-      <div className="heading"> Movie Theater Booking Portal </div>
+      <div className="heading"> Movie Theater Seats Booking Portal </div>
       <div className="movie-theater-booking">
         <div className="left-column">
           <div>

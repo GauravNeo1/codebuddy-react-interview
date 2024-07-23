@@ -138,7 +138,7 @@
     font-size: 6px;
   }
   .right-column {
-    flex: 0 0 54%;
+    flex: 0 0 52%;
   }
 }
 
@@ -149,7 +149,7 @@
     font-size: 7px;
   }
   .right-column {
-    flex: 0 0 54%;
+    flex: 0 0 52%;
   }
 }
 
@@ -160,6 +160,6 @@
     font-size: 11px;
   }
   .right-column {
-    flex: 0 0 66%;
+    flex: 0 0 63%;
   }
 }

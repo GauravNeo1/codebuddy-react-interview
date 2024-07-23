@@ -5,8 +5,8 @@ const SeatsPositions = ({ seatsData, selectedSeats, handleSeatSelect }) => {
     let seatRows = [];
 
     seatsData?.forEach((item) => {
-      const rowId = item.id;
-      const seatsInRow = item.seats.map((seat) => {
+      const rowId = item?.id;
+      const seatsInRow = item?.seats?.map((seat) => {
         const { id, row, seatNumber, isReserved } = seat;
         const isSelected = selectedSeats?.some(
           (selectedSeat) => selectedSeat?.seatId === seatNumber && selectedSeat?.rowId === row + 1,
@@ -23,7 +23,7 @@ const SeatsPositions = ({ seatsData, selectedSeats, handleSeatSelect }) => {
           >
             <p>{`Seat: ${seatNumber}`}</p>
             <p>{`Row: ${row + 1}`}</p>
-            <p>{`status : ${isReserved ? " R" : "NR"}`}</p>
+            <p>{`Status : ${isReserved ? " R" : "NR"}`}</p>
           </button>
         );
       });
