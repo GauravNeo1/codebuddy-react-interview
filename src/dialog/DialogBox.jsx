@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from "@mui/material";
 
-export default function SuccessSubmitDialog({ open, handleClose, type }) {
+export default function DialogBox({ open, handleClose, type }) {
   const dialogContents = {
     bookingConfirmed: {
       title: "Booking Confirmed",

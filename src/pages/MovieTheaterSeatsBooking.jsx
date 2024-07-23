@@ -3,7 +3,7 @@ import "../styles/MovieTheaterSeatsBooking.css";
 import TicketQuantitySelector from "../components/MovieTheaterSeatsBooking/TicketQuantitySelector";
 import SeatsPositions from "../components/MovieTheaterSeatsBooking/SeatsPositions";
 import SeatSelectionSummary from "../components/MovieTheaterSeatsBooking/SeatSelectionSummary";
-import SuccessSubmitDialog from "../dialog/SuccessSubmitDialog";
+import DialogBox from "../dialog/DialogBox";
 import { updateReservedStatus } from "../utils/utils";
 import { GET_SEATS, SUBMIT } from "../constants/constants";
 
@@ -131,11 +131,7 @@ const MovieTheaterSeatsBooking = () => {
           />
         </div>
       </div>
-      <SuccessSubmitDialog
-        open={submitDialog}
-        handleClose={() => setSubmitDialog(false)}
-        type={dialogType}
-      />
+      <DialogBox open={submitDialog} handleClose={() => setSubmitDialog(false)} type={dialogType} />
     </>
   );
 };
